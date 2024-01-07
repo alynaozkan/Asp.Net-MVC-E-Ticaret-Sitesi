@@ -1,0 +1,75 @@
+﻿@model FSWEBAPP.Models.ViewModels.Register
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        label[for="ConfirmSifre"] {
+            content: "Şifreyi Doğrula";
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    @using (Html.BeginForm("Register", "Kisiler", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Ad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Ad)
+                @Html.ValidationMessageFor(m => m.Ad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Soyad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Soyad)
+                @Html.ValidationMessageFor(m => m.Soyad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sifre, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Sifre)
+                @Html.ValidationMessageFor(m => m.Sifre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("ConfirmSifre", "Şifreyi Doğrula", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmSifre)
+                @Html.ValidationMessageFor(m => m.ConfirmSifre)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-outline-dark">Üye Ol</button>
+            </div>
+        </div>
+    }
+</body>
+</html>

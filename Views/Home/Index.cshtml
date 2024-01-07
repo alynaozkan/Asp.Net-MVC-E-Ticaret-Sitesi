@@ -1,0 +1,86 @@
+﻿@{
+
+    ViewBag.Title = "FS";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/homepage.css" rel="stylesheet" /> 
+
+    <style>
+        .kategori-container {
+            margin-top: 40px; 
+            margin-bottom: 40px;
+        }
+
+        .col-md-3 {
+            width: 25%;
+        }
+
+        .col-md-3 img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        body {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-block-container">
+        <div class="VideoEditorialBlock__container" data-component="Video" data-mounted="true">
+            <div class="VideoEditorialBlock__text">
+                <p>
+                    <strong>ARMAĞAN</strong><br>
+                    Yılın en içten anları yaklaşırken, sizi hediyenizin başlı başına bir kutlama olmasını sağlamak için özenle seçilmiş bir dizi enfes hazineyi keşfetmeye davet ediyoruz.
+                </p>
+            </div>
+            <div class="VideoEditorialBlock__video-wrap">
+                <video class="EditorialBlock__video fallback-aspect js-video" autoplay playsinline muted loop poster="https://cdn.accentuate.io/290295578668/1699030844579/Holiday-Editorial-FallbackImage.jpg?v=1699030844580">
+                    <source class="js-source" data-src="https://cdn.accentuate.io/290295578668/1699030833502/Holiday-Editorial.mp4?v=1699030833502" type="video/mp4" src="https://cdn.accentuate.io/290295578668/1699030833502/Holiday-Editorial.mp4?v=1699030833502">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="kategori-container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2 style="color:darkred">Güller</h2>
+                <a href="@Url.Action("Gul", "Kategori")">
+                    <img src="https://cdn.discordapp.com/attachments/1185269586086608966/1187835270935105707/florentina0647.png?ex=659854cd&is=6585dfcd&hm=816c8f7afae02392ccb191127f240d609f2b872d3d4c46b9b9936abacc129625&"
+                         alt="Gül Kategorisi" class="img-fluid">
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h2 style="color:darkred">Karışık Çiçekler</h2>
+                <a href="@Url.Action("Mixed", "Kategori")">
+                    <img src="https://cdn.discordapp.com/attachments/1185269586086608966/1187836885507260416/holidaypickup3982_7ec69df6-2a47-4596-8dd4-849522f0bb7d.webp?ex=6598564e&is=6585e14e&hm=d3166e971f1e740a71a9d9a371996b233ae9f568da859e02470d76b23b2bb2e1&"
+                         alt="Karışık Çiçek Kategorisi" class="img-fluid">
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h2 style="color:darkred">Laleler</h2>
+                <a href="@Url.Action("Lale", "Kategori")">
+                    <img src="https://cdn.discordapp.com/attachments/1185269586086608966/1187839085109325934/GBtlEduaUAAVcDX.jpg?ex=6598585a&is=6585e35a&hm=da9360ad2a2c37a56faed0f56ab96cf7856d91e4c374808c8ef392454408405e&"
+                         alt="Lale Kategorisi" class="img-fluid">
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h2 style="color:darkred">Orkideler</h2>
+                <a href="@Url.Action("Orkide", "Kategori")">
+                    <img src="https://cdn03.ciceksepeti.com/cicek/vbt255-1/XL/vbt255-1-8d9e80b7642caac-b0a16751.jpg"
+                         alt="Orkide Kategorisi" class="img-fluid">
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

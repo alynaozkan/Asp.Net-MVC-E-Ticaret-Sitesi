@@ -1,0 +1,16 @@
+﻿@model FSWEBAPP.Models.Kisiler
+
+<h2>Hesap Bilgileri</h2>
+
+<p>Hoş geldin, @Model.Ad @Model.Soyad!</p>
+<p>Email: @Model.Email</p>
+
+@using (Html.BeginForm("Cikis", "Kisiler", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-danger">Çıkış Yap</button>
+}
+
+<a href="@Url.Action("Index", "Sepet")">Sepetim</a>
+

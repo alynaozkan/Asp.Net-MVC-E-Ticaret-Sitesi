@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FSWEBAPP.Models.Urunler>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2 class="centered-text">ETERNITY FLOWERS</h2>
+    </header>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 col-xs-6 border-primary mb-3">
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <img src="@item.ResimURL" class="img-fluid" alt="@item.UrunAd">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <p class="card-text"><b></b>@item.UrunAd</p>
+                                <p class="card-text">@item.Fiyat ₺ </p>
+                                @using (Html.BeginForm("SepeteEkle", "Sepet", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="urunID" value="@item.UrunID" />
+                                    <input type="submit" class="btn btn-success text-white" value="Sepete Ekle" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+</body>
+</html>
+
+

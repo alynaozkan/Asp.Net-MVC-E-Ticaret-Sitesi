@@ -1,0 +1,30 @@
+﻿.VideoEditorialBlock__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px; 
+    margin: auto;
+}
+
+.VideoEditorialBlock__text {
+    flex: 1;
+    padding: 20px;
+}
+
+.VideoEditorialBlock__video-wrap {
+    flex: 1;
+    position: relative;
+    max-width: 640px; 
+}
+
+.VideoEditorialBlock__video-wrap video {
+        width: 100%;
+        height: auto;
+        display: block;
+
+}
+
+
+
+
+

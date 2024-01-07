@@ -1,0 +1,64 @@
+﻿@model FSWEBAPP.Models.Urunler
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Urunler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UrunAd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrunAd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Miktar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miktar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fiyat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fiyat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResimURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResimURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KategoriID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriID)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

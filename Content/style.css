@@ -1,0 +1,30 @@
+﻿header {
+    text-align: center;
+    padding: 20px;
+}
+
+.centered-text {
+    margin-top: 13px;
+    margin-right: 0px;
+    margin-bottom: 8px;
+    margin-left: 0px;
+}
+
+.h2 {
+    font-family: 'Didot Light', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 5.4rem;
+    line-height: 4.2rem;
+    letter-spacing: -.005rem;
+    text-transform: uppercase;
+}
+
+.centered-text {
+    color: darkred;
+}
+
+body {
+    background-color: white; 
+    color: black;
+}

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FSWEBAPP.Models.Siparisler>
+
+@{
+    ViewBag.Title = "Siparisler";
+}
+
+<h2>Siparişler</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Sipariş Tarih
+        </th>
+        <th>
+            Ürün Detay
+        </th>
+        <th>
+            Teslimat Adres
+        </th>
+        <th>
+            Toplam Tutar
+        </th>
+    </tr>
+
+    @foreach (var siparis in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => siparis.SiparisTarih)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => siparis.UrunDetay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => siparis.TeslimatAdres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => siparis.SiparisTutar)
+            </td>
+            
+        </tr>
+    }
+</table>

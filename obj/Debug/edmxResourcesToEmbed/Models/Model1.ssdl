@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FLOWERSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adresler">
+    <Key>
+      <PropertyRef Name="AdresID" />
+    </Key>
+    <Property Name="AdresTanim" Type="nvarchar" MaxLength="300" />
+    <Property Name="KisiID" Type="int" />
+    <Property Name="AdresID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kisiler">
+    <Key>
+      <PropertyRef Name="KisiID" />
+    </Key>
+    <Property Name="Ad" Type="nvarchar" MaxLength="20" />
+    <Property Name="Soyad" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+    <Property Name="KisiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" />
+  </EntityType>
+  <EntityType Name="Sepet">
+    <Key>
+      <PropertyRef Name="SepetID" />
+    </Key>
+    <Property Name="KisiID" Type="int" />
+    <Property Name="UrunID" Type="int" />
+    <Property Name="UrunAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="UrunMiktar" Type="tinyint" />
+    <Property Name="UrunFiyat" Type="smallint" />
+    <Property Name="ToplamSepet" Type="smallint" />
+    <Property Name="SiparisID" Type="int" />
+    <Property Name="SepetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Siparisler">
+    <Key>
+      <PropertyRef Name="SiparisID" />
+    </Key>
+    <Property Name="KisiID" Type="int" />
+    <Property Name="UrunID" Type="int" />
+    <Property Name="UrunAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="UrunFiyat" Type="smallint" />
+    <Property Name="SiparisTarih" Type="datetime" />
+    <Property Name="AdresID" Type="int" />
+    <Property Name="TeslimatAdres" Type="nvarchar" MaxLength="300" />
+    <Property Name="UrunMiktar" Type="tinyint" />
+    <Property Name="SiparisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrunDetay" Type="nvarchar(max)" />
+    <Property Name="SiparisTutar" Type="int" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="UrunID" />
+    </Key>
+    <Property Name="UrunAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="Miktar" Type="tinyint" />
+    <Property Name="Fiyat" Type="smallint" />
+    <Property Name="ResimURL" Type="nvarchar(max)" />
+    <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriID" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Adresler_Kisiler">
+    <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+    <End Role="Adresler" Type="Self.Adresler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="Adresler">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sepet_Kisiler">
+    <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sepet_Siparisler">
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Siparisler">
+        <PropertyRef Name="SiparisID" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="SiparisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sepet_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunID" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Adresler">
+    <End Role="Adresler" Type="Self.Adresler" Multiplicity="0..1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adresler">
+        <PropertyRef Name="AdresID" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="AdresID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Kisiler">
+    <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunID" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urunler_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="Urunler">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FLOWERSModelStoreContainer">
+    <EntitySet Name="Adresler" EntityType="Self.Adresler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kisiler" EntityType="Self.Kisiler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Siparisler" EntityType="Self.Siparisler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Adresler_Kisiler" Association="Self.FK_Adresler_Kisiler">
+      <End Role="Kisiler" EntitySet="Kisiler" />
+      <End Role="Adresler" EntitySet="Adresler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sepet_Kisiler" Association="Self.FK_Sepet_Kisiler">
+      <End Role="Kisiler" EntitySet="Kisiler" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sepet_Siparisler" Association="Self.FK_Sepet_Siparisler">
+      <End Role="Siparisler" EntitySet="Siparisler" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sepet_Urunler" Association="Self.FK_Sepet_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Adresler" Association="Self.FK_Siparisler_Adresler">
+      <End Role="Adresler" EntitySet="Adresler" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Kisiler" Association="Self.FK_Siparisler_Kisiler">
+      <End Role="Kisiler" EntitySet="Kisiler" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Urunler" Association="Self.FK_Siparisler_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urunler_Kategori" Association="Self.FK_Urunler_Kategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Urunler" EntitySet="Urunler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

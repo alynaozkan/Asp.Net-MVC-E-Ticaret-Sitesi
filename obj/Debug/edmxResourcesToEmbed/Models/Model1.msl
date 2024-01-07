@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FLOWERSModelStoreContainer" CdmEntityContainer="FLOWERSEntities">
+    <EntitySetMapping Name="Adresler">
+      <EntityTypeMapping TypeName="FLOWERSModel.Adresler">
+        <MappingFragment StoreEntitySet="Adresler">
+          <ScalarProperty Name="AdresTanim" ColumnName="AdresTanim" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="AdresID" ColumnName="AdresID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kisiler">
+      <EntityTypeMapping TypeName="FLOWERSModel.Kisiler">
+        <MappingFragment StoreEntitySet="Kisiler">
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sepet">
+      <EntityTypeMapping TypeName="FLOWERSModel.Sepet">
+        <MappingFragment StoreEntitySet="Sepet">
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+          <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+          <ScalarProperty Name="UrunMiktar" ColumnName="UrunMiktar" />
+          <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+          <ScalarProperty Name="ToplamSepet" ColumnName="ToplamSepet" />
+          <ScalarProperty Name="SiparisID" ColumnName="SiparisID" />
+          <ScalarProperty Name="SepetID" ColumnName="SepetID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Siparisler">
+      <EntityTypeMapping TypeName="FLOWERSModel.Siparisler">
+        <MappingFragment StoreEntitySet="Siparisler">
+          <ScalarProperty Name="SiparisTutar" ColumnName="SiparisTutar" />
+          <ScalarProperty Name="UrunDetay" ColumnName="UrunDetay" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+          <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+          <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+          <ScalarProperty Name="SiparisTarih" ColumnName="SiparisTarih" />
+          <ScalarProperty Name="AdresID" ColumnName="AdresID" />
+          <ScalarProperty Name="TeslimatAdres" ColumnName="TeslimatAdres" />
+          <ScalarProperty Name="UrunMiktar" ColumnName="UrunMiktar" />
+          <ScalarProperty Name="SiparisID" ColumnName="SiparisID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Urunler">
+      <EntityTypeMapping TypeName="FLOWERSModel.Urunler">
+        <MappingFragment StoreEntitySet="Urunler">
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+          <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+          <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+          <ScalarProperty Name="ResimURL" ColumnName="ResimURL" />
+          <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategori">
+      <EntityTypeMapping TypeName="FLOWERSModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,58 @@
+﻿@model FSWEBAPP.Models.Urunler
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Urunler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UrunAd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrunAd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Miktar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miktar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fiyat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fiyat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResimURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResimURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KategoriID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UrunID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

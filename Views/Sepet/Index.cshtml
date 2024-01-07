@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FSWEBAPP.Models.Sepet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sepet</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Ürün Adı
+        </th>
+        <th>
+            Ürün Miktarı
+        </th>
+        <th>
+            Ürün Fiyatı
+        </th>
+        <th>
+            Kullanıcı Adı
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Urunler.UrunAd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrunMiktar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrunFiyat)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Kisiler.Ad)
+            </td>
+            <td>
+                @Html.ActionLink("Sil", "Delete", new { id = item.SepetID })
+            </td>
+        </tr>
+    }
+
+<tr>
+    <td colspan="2"></td>
+    <td>
+        @using (Html.BeginForm("SiparisOlusturFromSepet", "Siparisler", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Sipariş Oluştur" />
+        }
+    </td>
+
+    <td></td>
+    <td></td>
+</tr>
+</table>

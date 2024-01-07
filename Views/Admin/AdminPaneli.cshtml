@@ -1,0 +1,30 @@
+﻿@model List<FSWEBAPP.Models.Kisiler>
+
+@{
+    ViewBag.Title = "Admin Paneli";
+}
+
+<h2>Admin Paneli</h2>
+
+<p>Hoş geldiniz,@ViewBag.AdminName!</p>
+
+<table class="table">
+    <tr>
+        <th>KisiID</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Email</th>
+        <th>Sifre</th>
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.KisiID</td>
+            <td>@user.Ad</td>
+            <td>@user.Soyad</td>
+            <td>@user.Email</td>
+            <td>@user.Sifre</td>
+        </tr>
+    }
+</table>

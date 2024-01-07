@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FLOWERSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adresler">
+          <Key>
+            <PropertyRef Name="AdresID" />
+          </Key>
+          <Property Name="AdresTanim" Type="nvarchar" MaxLength="300" />
+          <Property Name="KisiID" Type="int" />
+          <Property Name="AdresID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kisiler">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="Ad" Type="nvarchar" MaxLength="20" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+          <Property Name="KisiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" />
+        </EntityType>
+        <EntityType Name="Sepet">
+          <Key>
+            <PropertyRef Name="SepetID" />
+          </Key>
+          <Property Name="KisiID" Type="int" />
+          <Property Name="UrunID" Type="int" />
+          <Property Name="UrunAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="UrunMiktar" Type="tinyint" />
+          <Property Name="UrunFiyat" Type="smallint" />
+          <Property Name="ToplamSepet" Type="smallint" />
+          <Property Name="SiparisID" Type="int" />
+          <Property Name="SepetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="SiparisID" />
+          </Key>
+          <Property Name="KisiID" Type="int" />
+          <Property Name="UrunID" Type="int" />
+          <Property Name="UrunAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="UrunFiyat" Type="smallint" />
+          <Property Name="SiparisTarih" Type="datetime" />
+          <Property Name="AdresID" Type="int" />
+          <Property Name="TeslimatAdres" Type="nvarchar" MaxLength="300" />
+          <Property Name="UrunMiktar" Type="tinyint" />
+          <Property Name="SiparisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunDetay" Type="nvarchar(max)" />
+          <Property Name="SiparisTutar" Type="int" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="Miktar" Type="tinyint" />
+          <Property Name="Fiyat" Type="smallint" />
+          <Property Name="ResimURL" Type="nvarchar(max)" />
+          <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Adresler_Kisiler">
+          <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kisiler">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Adresler">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Kisiler">
+          <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kisiler">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="SiparisID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="SiparisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Adresler">
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresler">
+              <PropertyRef Name="AdresID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="AdresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Kisiler">
+          <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kisiler">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FLOWERSModelStoreContainer">
+          <EntitySet Name="Adresler" EntityType="Self.Adresler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kisiler" EntityType="Self.Kisiler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Adresler_Kisiler" Association="Self.FK_Adresler_Kisiler">
+            <End Role="Kisiler" EntitySet="Kisiler" />
+            <End Role="Adresler" EntitySet="Adresler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Kisiler" Association="Self.FK_Sepet_Kisiler">
+            <End Role="Kisiler" EntitySet="Kisiler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Siparisler" Association="Self.FK_Sepet_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Urunler" Association="Self.FK_Sepet_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Adresler" Association="Self.FK_Siparisler_Adresler">
+            <End Role="Adresler" EntitySet="Adresler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Kisiler" Association="Self.FK_Siparisler_Kisiler">
+            <End Role="Kisiler" EntitySet="Kisiler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Urunler" Association="Self.FK_Siparisler_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategori" Association="Self.FK_Urunler_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FLOWERSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adresler">
+          <Key>
+            <PropertyRef Name="AdresID" />
+          </Key>
+          <Property Name="AdresTanim" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KisiID" Type="Int32" />
+          <Property Name="AdresID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Kisiler" Relationship="Self.FK_Adresler_Kisiler" FromRole="Adresler" ToRole="Kisiler" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Adresler" FromRole="Adresler" ToRole="Siparisler" />
+        </EntityType>
+        <EntityType Name="Kisiler">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KisiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Adresler" Relationship="Self.FK_Adresler_Kisiler" FromRole="Kisiler" ToRole="Adresler" />
+          <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_Kisiler" FromRole="Kisiler" ToRole="Sepet" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Kisiler" FromRole="Kisiler" ToRole="Siparisler" />
+          <Property Name="IsAdmin" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Sepet">
+          <Key>
+            <PropertyRef Name="SepetID" />
+          </Key>
+          <Property Name="KisiID" Type="Int32" />
+          <Property Name="UrunID" Type="Int32" />
+          <Property Name="UrunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UrunMiktar" Type="Byte" />
+          <Property Name="UrunFiyat" Type="Int16" />
+          <Property Name="ToplamSepet" Type="Int16" />
+          <Property Name="SiparisID" Type="Int32" />
+          <Property Name="SepetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Kisiler" Relationship="Self.FK_Sepet_Kisiler" FromRole="Sepet" ToRole="Kisiler" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Sepet_Siparisler" FromRole="Sepet" ToRole="Siparisler" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Sepet_Urunler" FromRole="Sepet" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="SiparisID" />
+          </Key>
+          <Property Name="KisiID" Type="Int32" />
+          <Property Name="UrunID" Type="Int32" />
+          <Property Name="UrunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UrunFiyat" Type="Int16" />
+          <Property Name="SiparisTarih" Type="DateTime" Precision="3" />
+          <Property Name="AdresID" Type="Int32" />
+          <Property Name="TeslimatAdres" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="UrunMiktar" Type="Byte" />
+          <Property Name="SiparisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Adresler" Relationship="Self.FK_Siparisler_Adresler" FromRole="Siparisler" ToRole="Adresler" />
+          <NavigationProperty Name="Kisiler" Relationship="Self.FK_Siparisler_Kisiler" FromRole="Siparisler" ToRole="Kisiler" />
+          <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_Siparisler" FromRole="Siparisler" ToRole="Sepet" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Siparisler_Urunler" FromRole="Siparisler" ToRole="Urunler" />
+          <Property Name="UrunDetay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiparisTutar" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Miktar" Type="Byte" />
+          <Property Name="Fiyat" Type="Int16" />
+          <Property Name="ResimURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UrunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_Urunler" FromRole="Urunler" ToRole="Sepet" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Urunler" FromRole="Urunler" ToRole="Siparisler" />
+          <Property Name="KategoriID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kategori" Relationship="FLOWERSModel.FK_Urunler_Kategori" FromRole="Urunler" ToRole="Kategori" />
+        </EntityType>
+        <Association Name="FK_Adresler_Kisiler">
+          <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kisiler">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Adresler">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Adresler">
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresler">
+              <PropertyRef Name="AdresID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="AdresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Kisiler">
+          <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kisiler">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Kisiler">
+          <End Role="Kisiler" Type="Self.Kisiler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kisiler">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="SiparisID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="SiparisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FLOWERSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adresler" EntityType="Self.Adresler" />
+          <EntitySet Name="Kisiler" EntityType="Self.Kisiler" />
+          <EntitySet Name="Sepet" EntityType="Self.Sepet" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" />
+          <AssociationSet Name="FK_Adresler_Kisiler" Association="Self.FK_Adresler_Kisiler">
+            <End Role="Kisiler" EntitySet="Kisiler" />
+            <End Role="Adresler" EntitySet="Adresler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Adresler" Association="Self.FK_Siparisler_Adresler">
+            <End Role="Adresler" EntitySet="Adresler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Kisiler" Association="Self.FK_Sepet_Kisiler">
+            <End Role="Kisiler" EntitySet="Kisiler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Kisiler" Association="Self.FK_Siparisler_Kisiler">
+            <End Role="Kisiler" EntitySet="Kisiler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Siparisler" Association="Self.FK_Sepet_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Urunler" Association="Self.FK_Sepet_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Urunler" Association="Self.FK_Siparisler_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <EntitySet Name="Kategori" EntityType="FLOWERSModel.Kategori" />
+          <AssociationSet Name="FK_Urunler_Kategori" Association="FLOWERSModel.FK_Urunler_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Urunler" Relationship="FLOWERSModel.FK_Urunler_Kategori" FromRole="Kategori" ToRole="Urunler" />
+        </EntityType>
+        <Association Name="FK_Urunler_Kategori">
+          <End Type="FLOWERSModel.Kategori" Role="Kategori" Multiplicity="0..1" />
+          <End Type="FLOWERSModel.Urunler" Role="Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FLOWERSModelStoreContainer" CdmEntityContainer="FLOWERSEntities">
+          <EntitySetMapping Name="Adresler">
+            <EntityTypeMapping TypeName="FLOWERSModel.Adresler">
+              <MappingFragment StoreEntitySet="Adresler">
+                <ScalarProperty Name="AdresTanim" ColumnName="AdresTanim" />
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+                <ScalarProperty Name="AdresID" ColumnName="AdresID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kisiler">
+            <EntityTypeMapping TypeName="FLOWERSModel.Kisiler">
+              <MappingFragment StoreEntitySet="Kisiler">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sepet">
+            <EntityTypeMapping TypeName="FLOWERSModel.Sepet">
+              <MappingFragment StoreEntitySet="Sepet">
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+                <ScalarProperty Name="UrunMiktar" ColumnName="UrunMiktar" />
+                <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+                <ScalarProperty Name="ToplamSepet" ColumnName="ToplamSepet" />
+                <ScalarProperty Name="SiparisID" ColumnName="SiparisID" />
+                <ScalarProperty Name="SepetID" ColumnName="SepetID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparisler">
+            <EntityTypeMapping TypeName="FLOWERSModel.Siparisler">
+              <MappingFragment StoreEntitySet="Siparisler">
+                <ScalarProperty Name="SiparisTutar" ColumnName="SiparisTutar" />
+                <ScalarProperty Name="UrunDetay" ColumnName="UrunDetay" />
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+                <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+                <ScalarProperty Name="SiparisTarih" ColumnName="SiparisTarih" />
+                <ScalarProperty Name="AdresID" ColumnName="AdresID" />
+                <ScalarProperty Name="TeslimatAdres" ColumnName="TeslimatAdres" />
+                <ScalarProperty Name="UrunMiktar" ColumnName="UrunMiktar" />
+                <ScalarProperty Name="SiparisID" ColumnName="SiparisID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urunler">
+            <EntityTypeMapping TypeName="FLOWERSModel.Urunler">
+              <MappingFragment StoreEntitySet="Urunler">
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="ResimURL" ColumnName="ResimURL" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="FLOWERSModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,30 @@
+﻿@model FSWEBAPP.Models.ViewModels.SiparisOlusturViewModel
+
+@{
+    ViewBag.Title = "Sipariş Oluştur";
+}
+
+<h2>Sipariş Oluştur</h2>
+
+@using (Html.BeginForm("OnaylaVeTamamla", "Siparisler", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <h3>Ürün Detayları</h3>
+    <p>@Model.UrunDetay</p>
+
+    <h3>Teslimat Adresi Seçin</h3>
+    <div>
+        @foreach (var adres in Model.UserAddresses)
+        {
+            <label>
+                @Html.RadioButtonFor(m => m.SelectedAddressId, adres.AdresID) @adres.AdresTanim
+            </label>
+            <br />
+        }
+    </div>
+
+    <div>
+        <input type="submit" value="Onayla ve Tamamla" />
+    </div>
+}
